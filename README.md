@@ -1,5 +1,5 @@
 # chicago
-#### Needs Python 3.7+
+#### Needs Python 3.5+
 - - - -
 1. Create and enter Virtual Environment
     1. python -m venv venv
