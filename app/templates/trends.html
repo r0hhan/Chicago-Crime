@@ -127,49 +127,23 @@
                   <h6 class="m-0 font-weight-bold text-primary">Total Crime</h6>
                 </div>
                 <div class="card-body">
-                  <canvas id="myBarChart"></canvas>
-                  <script type="text/javascript">
-                    var ctxD = document.getElementById("myBarChart");
-
-                    var dataBar = {
-                      datasets: [{
-                        data: {{ perc }},
-                        backgroundColor: ["#e6194b", "#f58231", "#ffe119", "#bcf60c","#3cb44b"],
-                        label: 'Data'
-                      }],
-                      labels: ['2001-2005', '2006-2010', '2011-2015', '2016-2019'],
-                    };
-
-                    var donut = new Chart(ctxD, {
-                      type: 'bar',
-                      data: dataBar,
-                      options: {
-                        responsive: true,
-                        legend: {
-                          display: false
-                        },
-                        scales: {
-                          yAxes: [
-                            {
-                              scaleLabel: {
-                                display: true,
-                                labelString: 'Crime (Scales 10^5)'
-                              }
-                            }
-                          ],
-                          xAxes: [
-                            {
-                              scaleLabel: {
-                                display: false,
-                                labelString: 'Years'
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    });
-                  </script>
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="From year" aria-label="Search" aria-describedby="basic-addon2">
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="To Year">
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                   <hr>
+
                 </div>
               </div>
             </div>
