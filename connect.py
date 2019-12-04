@@ -117,4 +117,17 @@ def complex4(year):
     con.close()
 
 def complex5():
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+
+    cur.execute("SELECT x.ward_id, ROUND(10000*(a/wpopulation_2000 - b/wpopulation_2010),2) safer FROM(SELECT w.ward_id, w.wpopulation_2000, count(*) a FROM ward w, crime c where w.ward_id=c.ward_id AND EXTRACT(YEAR FROM date_of_crime)=2002 GROUP BY (w.ward_id, w.wpopulation_2000)) x, (SELECT w.ward_id, w.wpopulation_2010, count(*) b FROM ward w, crime c where w.ward_id=c.ward_id AND EXTRACT(YEAR FROM date_of_crime)=2010 GROUP BY (w.ward_id, w.wpopulation_2010)) y WHERE x.ward_id=y.ward_id AND (a/wpopulation_2000 - b/wpopulation_2010)>0 ORDER BY safer DESC")
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
+
+def complex6():
     return 1
