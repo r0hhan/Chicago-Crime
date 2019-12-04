@@ -3,15 +3,13 @@ from flask import render_template, request, redirect, url_for, session
 import requests, json
 import connect
 
-@app.route("/")
-@app.route("/index/")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index/", methods=['GET', 'POST'])
 def index():
+	if request.method == 'POST':
+		tuples = connect.getAll()
+		return render_template('index.html', tuples=tuples)
 	return render_template('index.html')
-
-@app.route("/count/")
-def count():
-	tuples = connect.getTuples()
-	return render_template('count.html', tuples = tuples)
 
 @app.route("/compare/")
 def compare():
