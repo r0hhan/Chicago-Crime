@@ -29,6 +29,7 @@ def s1mple1():
     cur.execute("SELECT type_of_crime, COUNT(*), round(100*(COUNT(*) / SUM(COUNT(*)) OVER ()),2) perc FROM crime GROUP BY type_of_crime")
     for x in cur:
         record.append(x)
+        
     return record
     con.close()
 
