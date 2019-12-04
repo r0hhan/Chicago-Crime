@@ -130,4 +130,14 @@ def complex5():
     con.close()
 
 def complex6():
-    return 1
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+
+    cur.execute("SELECT x.type_of_crime, crimes, arrests, ROUND(100*arrests/crimes,2) perc_arrests FROM(SELECT type_of_crime, count(*) crimes FROM crime GROUP BY type_of_crime) x, (SELECT type_of_crime, count(*) arrests FROM crime WHERE arrest='TRUE' GROUP BY type_of_crime) y WHERE x.type_of_crime=y.type_of_crime ORDER BY perc_arrests DESC")
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
