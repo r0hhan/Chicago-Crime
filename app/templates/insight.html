@@ -216,6 +216,24 @@
             </div>
           </div>
 
+          <div class="row">
+            <!-- Content Column -->
+            <div class="col-lg mb-4">
+              <!-- Approach -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Wards that got safer over the decade</h6>
+                </div>
+                <div class="card-body">
+                  {% for x in wards %}
+                    <b>Ward {{ x[0] }}:</b> <i>{{ x[1] }}</i> <br>
+                  {% endfor %}
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 

@@ -11,6 +11,18 @@ def index():
 		return render_template('index.html', tuples=tuples)
 	return render_template('index.html')
 
+@app.route("/insight/")
+def insight():
+	pie = connect.s1mple1()
+	labels = []
+	perc = []
+	for x in pie:
+		labels.append(x[0][1:-1])
+		perc.append(x[1])
+	yers = connect.s1mple2()
+	wards = connect.complex5()
+	return render_template('insight.html', labels=labels, perc=perc, yers=yers, wards=wards)
+
 @app.route("/compare/", methods=['GET', 'POST'])
 def compare():
 	if request.method == 'POST':
@@ -31,28 +43,29 @@ def compare():
 			return render_template('compare.html', declineList=declineList)
 	return render_template('compare.html')
 
-@app.route("/insight/")
-def insight():
-	pie = connect.s1mple1()
-	labels = []
-	perc = []
-	for x in pie:
-		labels.append(x[0][1:-1])
-		perc.append(x[1])
-	yers = connect.s1mple2()
-	return render_template('insight.html', labels=labels, perc=perc, yers=yers)
 
 @app.route("/trends/", methods=['GET', 'POST'])
 def trends():
 	data = ['Deceptive Practice', 'Narcotics', 'Burglary', 'Criminal Damage', 'Kidnapping', 'Prostitution', 'Human Trafficking', 'Robbery', 'Crim Sexual Assault', 'Assault', 'Battery Homicide', 'Motor Vehicle Theft', 'Theft', 'Offense Involving Children', 'Weapons Violation']
 	if request.method == 'POST':
+		if request.form['button'] == 'yearInput':
+			year = request.form['time']
+			value = connect.complex4(year)
+			yData = []
+			pDis = []
+			for x in value:
+				yData.append(x[1])
+				pDis.append(x[0])
+			return render_template('trends.html', yData = yData, pDis=pDis, value=value, data=data)
 		labels = list(range(1, 25))
 		crime = request.form.get('crimeSelect')
 		value = connect.complex3(crime.upper())
 		values = []
 		for x in value:
 			values.append(x[1])
-	return render_template('trends.html', data = data, values=values, labels=labels, crime=crime.title())
+		return render_template('trends.html', data = data, values=values, labels=labels, crime=crime.title())
+	else:
+		return render_template('trends.html', data = data)
 
 if __name__ == '__main__':
 	app.run()

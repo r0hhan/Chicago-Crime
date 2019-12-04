@@ -124,26 +124,26 @@
               <!-- Approach -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Total Crime</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Best District by Year</h6>
                 </div>
                 <div class="card-body">
-                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" >
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method = "POST">
                     <div class="input-group">
-                      <input type="text" class="form-control bg-light border-0 small" placeholder="From year" aria-label="Search" aria-describedby="basic-addon2">
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="text" class="form-control bg-light border-0 small" placeholder="To Year">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Year" name = "time">
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit" name = "button" value="yearInput">
                           <i class="fas fa-search fa-sm"></i>
                         </button>
                       </div>
                     </div>
                   </form>
                   <hr>
-
+                  <br><br>
+                  {% for x in value %}
+                  <b>Police District {{ x[0] }}:</b> <i>{{ x[1] }}</i> <br>
+                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -172,12 +172,13 @@
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary" type="submit" name = "button" value="dropdown">
                           <i class="fas fa-search fa-sm"></i>
                         </button>
                       </div>
                     </div>
                   </form>
+                  <hr>
                   <br><br>
                   <canvas id="myLineChart"></canvas>
                   <script type="text/javascript">
@@ -218,8 +219,6 @@
         							}
         						});
         					</script>
-
-                  <hr>
                 </div>
               </div>
             </div>
