@@ -161,32 +161,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <canvas id="myPieChart"></canvas>
-                  <script type="text/javascript">
-                    var ctxD = document.getElementById("myPieChart");
-
-                    var dataDonut = {
-                      datasets: [{
-                        data: {{ perc }},
-                        backgroundColor: ["#e6194b", "#f58231", "##ffe119", "#bcf60c",
-                                          "#3cb44b", "#008080", "#4363d8", "#000000",
-                                          "#808080", "#911eb4", "#f032e6", "#aaffc3",
-                                          "#800000", "#fabebe", "#ffd8b1", "#000075",]
-                      }],
-                      labels: ['Perceptive Practice', 'Narcotic', 'Burglar', 'Criminal Damage', 'Kidnapping', 'Prostitution', 'Human Trafficking', 'Robber', 'Criminal Sexual Assault', 'Assault', 'Battery Homicide', 'Motor Vehicle Theft', 'Theft', 'Offense Involving Children', 'Weapons Violation']
-                    };
-
-                    var donut = new Chart(ctxD, {
-                      type: 'pie',
-                      data: dataDonut,
-                      options: {
-                        responsive: true,
-                        legend: {
-                          display: true
-                        }
-                      }
-                    });
-                  </script>
+                  
                   <hr>
                 </div>
               </div>
