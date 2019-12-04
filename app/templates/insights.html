@@ -18,8 +18,8 @@
   <!-- Custom styles for this template-->
   <link href="{{url_for('static', filename='css/sb-admin-2.min.css')}}" rel="stylesheet">
 
-  <!-- ChartJS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2/dist/Chart.min.css">
+  <!-- Page level plugins -->
+  <script src="{{url_for('static', filename='vendor/chart.js/Chart.js')}}"></script>
 
 </head>
 
@@ -138,27 +138,47 @@
               </div>
             </div>
             <!-- Content Column -->
-            <!-- Donut Chart -->
-              <div class="col-lg mb-4">
-                <div class="card shadow mb-4">
-                  <!-- Card Header - Dropdown -->
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                  </div>
-                  <!-- Card Body -->
-                  <div class="card-body">
-                      <div class="img-responsive">
-                        <canvas id="pieChart"></canvas>
-                      </div>  
-                      <script>
-                        
-                      </script>
-                      
-                        <hr>
-                  </div>
+            <div class="col-lg mb-4">
+              <!-- Approach -->
+              <!-- Donut Chart -->
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <canvas id="myPieChart"></canvas>
+                  <script type="text/javascript">
+                    var ctxD = document.getElementById("myPieChart");
+
+                    var dataDonut = {
+                      datasets: [{
+                        data: [10, 5],
+                        backgroundColor: ["red"]
+                      }],
+                      labels: [
+                        'Health',
+                        'Deficit'
+                      ]
+                    };
+
+                    var donut = new Chart(ctxD, {
+                      type: 'pie',
+                      data: dataDonut,
+                      options: {
+                        responsive: true,
+                        legend: {
+                          display: true
+                        }
+                      }
+                    });
+                  </script>
+                  <hr>
                 </div>
               </div>
             </div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -197,16 +217,9 @@
   <!-- Custom scripts for all pages-->
   <script src="{{url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
 
-  <!-- Page level plugins -->
-  <script src="{{url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
-
   <!-- Page level custom scripts -->
-  <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
-  <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
-
-  <!-- ChartJS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2/dist/Chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2/dist/Chart.bundle.min.js"></script>
+  <!-- <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
+  <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script> -->
 
 </body>
 
