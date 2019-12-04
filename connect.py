@@ -20,11 +20,11 @@ def s1mple1():
     cur.execute("SELECT type_of_crime, COUNT(*), round(100*(COUNT(*) / SUM(COUNT(*)) OVER ()),2) perc FROM crime GROUP BY type_of_crime")
     for x in cur:
         record.append(x)
-        
-    return record
-    con.close()
 
-def s1mple2:
+    con.close()
+    return record
+
+def s1mple2():
     connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
     con = cx_Oracle.connect(connector)
     cur = con.cursor()
@@ -44,6 +44,6 @@ def s1mple2:
     cur.execute("SELECT COUNT(*) FROM CRIME WHERE EXTRACT(YEAR FROM date_of_crime) BETWEEN 2016 and 2019")
     for x in cur:
         record.append(x)
-
-    return record
+    print (record)
     con.close()
+    return record
