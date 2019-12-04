@@ -124,7 +124,7 @@
               <!-- Approach -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Total Crime</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Decline over the Years</h6>
                 </div>
                 <div class="card-body">
                   <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
@@ -136,7 +136,7 @@
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary" type="submit" value="form1" name="from">
                           <i class="fas fa-search fa-sm"></i>
                         </button>
                       </div>
@@ -157,12 +157,32 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Distribution of Crime</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Decline per Crime</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST">
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="From year" name = "low1">
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="To Year" name = "high1">
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" value="form2" name="from">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                   <hr>
+                  <br>
+                  {% if declineList %}
+                    {% for item in declineList %}
+                    <p> <b> {{ item[0] }}: </b><i>{{ item[1] }}%</i></p>
+                    {% endfor %}
+                  {% endif %}
                 </div>
               </div>
             </div>

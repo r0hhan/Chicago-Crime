@@ -14,14 +14,21 @@ def index():
 @app.route("/compare/", methods=['GET', 'POST'])
 def compare():
 	if request.method == 'POST':
-		low = request.form['low']
-		high = request.form['high']
-		decline = connect.complex1(low, high)
-		decline = decline[0][0]
-		text = "Decrease"
-		if decline < 0:
-			text = "Increase"
-		return render_template('compare.html', decline=abs(decline), text=text)
+		if request.form['from'] == 'form1':
+			low = request.form['low']
+			high = request.form['high']
+			decline = connect.complex1(low, high)
+			decline = decline[0][0]
+			text = "Decrease"
+			if decline < 0:
+				text = "Increase"
+			return render_template('compare.html', decline=abs(decline), text=text)
+		else:
+			low = request.form['low1']
+			high = request.form['high1']
+			declineList = connect.complex2(low, high)
+			print (declineList)
+			return render_template('compare.html', declineList=declineList)
 	return render_template('compare.html')
 
 @app.route("/insight/")
