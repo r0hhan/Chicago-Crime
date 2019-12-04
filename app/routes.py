@@ -42,9 +42,17 @@ def insight():
 	yers = connect.s1mple2()
 	return render_template('insight.html', labels=labels, perc=perc, yers=yers)
 
-@app.route("/trends/")
+@app.route("/trends/", methods=['GET', 'POST'])
 def trends():
-	return render_template('trends.html')
+	data = ['Deceptive Practice', 'Narcotics', 'Burglary', 'Criminal Damage', 'Kidnapping', 'Prostitution', 'Human Trafficking', 'Robbery', 'Crim Sexual Assault', 'Assault', 'Battery Homicide', 'Motor Vehicle Theft', 'Theft', 'Offense Involving Children', 'Weapons Violation']
+	if request.method == 'POST':
+		labels = list(range(1, 25))
+		crime = request.form.get('crimeSelect')
+		value = connect.complex3(crime.upper())
+		values = []
+		for x in value:
+			values.append(x[1])
+	return render_template('trends.html', data = data, values=values, labels=labels, crime=crime.title())
 
 if __name__ == '__main__':
 	app.run()
