@@ -14,7 +14,7 @@ def index():
 @app.route("/compare/")
 def compare():
 	test = connect.s1mple2()
-	print = (test)
+	print (test)
 	return render_template('compare.html')
 
 @app.route("/insights/")
