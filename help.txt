@@ -1,0 +1,12 @@
+S1MPLE
+1.pie chart showing all the crimes in % of total crime count
+2.decline in crime rate (chunks of 4yrs i.e. 5 bars in graph, 2001-2004, 2005-2008, 2009-2012, 2013-2016, 2017-present)
+3.show plot of crimes on map? (last 2-3yrs prolle)
+
+COMPLEX
+1.% decline in total crime from 2001-2019 (plot top X declines)
+2.% decline for every crime for given year set (plot top X declined)
+3.incidents by hour of the day (2018-19)(narcotics, sexual assault, theft, robbery, etc)
+4.% arrests grouped by police district to see which pd has highest %arrests, output top 5 (how many years, ask user/on us)
+5.which wards got safer over the years per 10k population (group by ward). show top 5/list
+6.%arrests of all crime w.r.t type of crime (all over)
