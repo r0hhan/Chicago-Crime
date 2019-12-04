@@ -21,8 +21,8 @@ def s1mple1():
     for x in cur:
         record.append(x)
 
-    return record
     con.close()
+    return record
 
 def s1mple2():
     connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'

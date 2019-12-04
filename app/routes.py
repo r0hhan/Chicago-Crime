@@ -13,15 +13,18 @@ def index():
 
 @app.route("/compare/")
 def compare():
-	test = connect.complex2(2010, 2019)
-	print(test)
 	return render_template('compare.html')
 
-@app.route("/insights/")
-def insights():
-	test = connect.s1mpleTest(2000, 2010)
-	print(test)
-	return render_template('insights.html')
+@app.route("/insight/")
+def insight():
+	pie = connect.s1mple1()
+	labels = []
+	perc = []
+	for x in pie:
+		labels.append(x[0][1:-1])
+		perc.append(x[1])
+	yers = connect.s1mple2()
+	return render_template('insight.html', labels=labels, perc=perc, yers=yers)
 
 @app.route("/trends/")
 def trends():

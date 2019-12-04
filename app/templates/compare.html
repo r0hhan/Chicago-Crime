@@ -18,6 +18,9 @@
   <!-- Custom styles for this template-->
   <link href="{{url_for('static', filename='css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+  <!-- Page level plugins -->
+  <script src="{{url_for('static', filename='vendor/chart.js/Chart.js')}}"></script>
+
 </head>
 
 <body id="page-top">
@@ -40,7 +43,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="{{url_for('index')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>About</span></a>
@@ -56,7 +59,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url_for('insights')}}">
+        <a class="nav-link collapsed" href="{{url_for('insight')}}">
           <i class="fas fa-fw fa-cog"></i>
           <span>Insight</span>
         </a>
@@ -70,7 +73,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="{{url_for('compare')}}">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Compare</span>
@@ -110,14 +113,9 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <form method="POST">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-              <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                  <i class="fas fa-download fa-sm text-white-50"></i> Fetch Number of Tuples
-              </button>
+              <h1 class="h3 mb-0 text-gray-800">Insight</h1>
             </div>
-          </form>
 
           <!-- Content Row -->
           <div class="row">
@@ -126,31 +124,96 @@
               <!-- Approach -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">About Text</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Total Crime</h6>
                 </div>
                 <div class="card-body">
-                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
+                  <canvas id="myBarChart"></canvas>
+                  <script type="text/javascript">
+                    var ctxD = document.getElementById("myBarChart");
+
+                    var dataBar = {
+                      datasets: [{
+                        data: {{ perc }},
+                        backgroundColor: ["#e6194b", "#f58231", "#ffe119", "#bcf60c","#3cb44b"],
+                        label: 'Data'
+                      }],
+                      labels: ['2001-2005', '2006-2010', '2011-2015', '2016-2019'],
+                    };
+
+                    var donut = new Chart(ctxD, {
+                      type: 'bar',
+                      data: dataBar,
+                      options: {
+                        responsive: true,
+                        legend: {
+                          display: false
+                        },
+                        scales: {
+                          yAxes: [
+                            {
+                              scaleLabel: {
+                                display: true,
+                                labelString: 'Crime (Scales 10^5)'
+                              }
+                            }
+                          ],
+                          xAxes: [
+                            {
+                              scaleLabel: {
+                                display: false,
+                                labelString: 'Years'
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    });
+                  </script>
+                  <hr>
                 </div>
               </div>
             </div>
-            {% if tuples %}
             <!-- Content Column -->
             <div class="col-lg mb-4">
               <!-- Approach -->
+              <!-- Pie Chart -->
               <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Number of Tuples</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Distribution of Crime</h6>
                 </div>
+                <!-- Card Body -->
                 <div class="card-body">
-                  <p>The number of Tuples Fetched were: <b><i>{{ tuples }}</i></b>.</p>
-                  <br><br><br><br><br><br>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                  <br><br><br>
+                  <canvas id="myPieChart"></canvas>
+                  <script type="text/javascript">
+                    var ctxD = document.getElementById("myPieChart");
+
+                    var dataDonut = {
+                      datasets: [{
+                        data: {{ perc }},
+                        backgroundColor: ["#e6194b", "#f58231", "##ffe119", "#bcf60c",
+                                          "#3cb44b", "#008080", "#4363d8", "#000000",
+                                          "#808080", "#911eb4", "#f032e6", "#aaffc3",
+                                          "#800000", "#fabebe", "#ffd8b1", "#000075",]
+                      }],
+                      labels: ['Perceptive Practice', 'Narcotic', 'Burglar', 'Criminal Damage', 'Kidnapping', 'Prostitution', 'Human Trafficking', 'Robber', 'Criminal Sexual Assault', 'Assault', 'Battery Homicide', 'Motor Vehicle Theft', 'Theft', 'Offense Involving Children', 'Weapons Violation']
+                    };
+
+                    var donut = new Chart(ctxD, {
+                      type: 'pie',
+                      data: dataDonut,
+                      options: {
+                        responsive: true,
+                        legend: {
+                          display: true
+                        }
+                      }
+                    });
+                  </script>
+                  <hr>
                 </div>
               </div>
             </div>
-            {% endif %}
           </div>
 
         </div>
@@ -190,12 +253,9 @@
   <!-- Custom scripts for all pages-->
   <script src="{{url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
 
-  <!-- Page level plugins -->
-  <script src="{{url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
-
   <!-- Page level custom scripts -->
-  <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
-  <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
+  <!-- <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
+  <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script> -->
 
 </body>
 
