@@ -44,6 +44,7 @@ def s1mple2():
     cur.execute("SELECT COUNT(*) FROM CRIME WHERE EXTRACT(YEAR FROM date_of_crime) BETWEEN 2016 and 2019")
     for x in cur:
         record.append(x[0])
+
     return record
     con.close()
 
@@ -65,7 +66,32 @@ def s1mpleTest(year1, year2):
 
 #s1mple3 (heat map under construction *bonus query* xd)
 
-def complex2(crime_value):
+def complex1(year1, year2):
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+    cur.execute("SELECT ROUND(100*(x.c-y.c)/x.c,2) decline FROM (SELECT COUNT(*) c FROM crime WHERE EXTRACT(YEAR FROM date_of_crime)='{0}') x CROSS JOIN (SELECT COUNT(*) c FROM crime WHERE EXTRACT(YEAR FROM date_of_crime)='{1}') y".format(year1, year2))
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
+
+def complex2(year1, year2):
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+
+    cur.execute("SELECT x.type_of_crime, ROUND(100*(x.c-y.c)/x.c,2) decline FROM(SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)=2010 GROUP BY type_of_crime) x, (SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)=2019 GROUP BY type_of_crime) y WHERE x.type_of_crime=y.type_of_crime AND x.c>y.c ORDER BY decline DESC")
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
+
+def complex3(crime_value):
     connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
     con = cx_Oracle.connect(connector)
     cur = con.cursor()
@@ -76,3 +102,6 @@ def complex2(crime_value):
 
     return record
     con.close()
+
+def complex4():
+    return 1

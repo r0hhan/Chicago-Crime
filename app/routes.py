@@ -13,7 +13,7 @@ def index():
 
 @app.route("/compare/")
 def compare():
-	test = connect.complex2('BATTERY')
+	test = connect.complex2(2010, 2019)
 	print(test)
 	return render_template('compare.html')
 
