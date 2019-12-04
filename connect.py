@@ -65,5 +65,14 @@ def s1mpleTest(year1, year2):
 
 #s1mple3 (heat map under construction *bonus query* xd)
 
-def complex1():
-    return 1
+def complex2(crime_value):
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+    cur.execute("SELECT EXTRACT(HOUR FROM date_of_crime), COUNT(*) count_crime FROM crime WHERE EXTRACT(YEAR from date_of_crime) BETWEEN 2018 and 2019 AND type_of_crime ='" + crime_value + "' GROUP BY EXTRACT(HOUR FROM date_of_crime) ORDER BY EXTRACT(HOUR FROM date_of_crime)")
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
