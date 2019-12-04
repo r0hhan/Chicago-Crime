@@ -48,22 +48,6 @@ def s1mple2():
     return record
     con.close()
 
-def s1mpleTest(year1, year2):
-    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
-    con = cx_Oracle.connect(connector)
-    cur = con.cursor()
-    record = []
-    cur.execute("SELECT count(*) from crime where EXTRACT(year from date_of_crime)>='{0}' and EXTRACT(year from date_of_crime)<='{1}'".format(year1, year2))
-    for x in cur:
-        record.append(x)
-
-    cur.execute("SELECT count(*) from crime where EXTRACT(year from date_of_crime) between 2000 and 2010")
-    for x in cur:
-        record.append(x)
-
-    return record
-    con.close()
-
 #s1mple3 (heat map under construction *bonus query* xd)
 
 def complex1(year1, year2):
