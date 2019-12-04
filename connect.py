@@ -50,5 +50,5 @@ def s1mple2():
 
 #s1mple3 (heat map under construction *bonus query* xd)
 
-def complex1:
+def complex1():
     return 1
