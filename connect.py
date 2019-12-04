@@ -84,7 +84,7 @@ def complex2(year1, year2):
     cur = con.cursor()
     record = []
 
-    cur.execute("SELECT x.type_of_crime, ROUND(100*(x.c-y.c)/x.c,2) decline FROM(SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)=2010 GROUP BY type_of_crime) x, (SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)=2019 GROUP BY type_of_crime) y WHERE x.type_of_crime=y.type_of_crime AND x.c>y.c ORDER BY decline DESC")
+    cur.execute("SELECT x.type_of_crime, ROUND(100*(x.c-y.c)/x.c,2) decline FROM(SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)='{0}' GROUP BY type_of_crime) x, (SELECT type_of_crime, COUNT(*) c FROM crime WHERE EXTRACT(YEAR from date_of_crime)='{1}' GROUP BY type_of_crime) y WHERE x.type_of_crime=y.type_of_crime AND x.c>y.c ORDER BY decline DESC".format(year1, year2))
     for x in cur:
         record.append(x)
 
@@ -103,5 +103,18 @@ def complex3(crime_value):
     return record
     con.close()
 
-def complex4():
+def complex4(year):
+    connector = 'rwanare/'+app.config['PASSWORD']+'@oracle.cise.ufl.edu:1521/orcl'
+    con = cx_Oracle.connect(connector)
+    cur = con.cursor()
+    record = []
+
+    cur.execute("SELECT x.pdistrict_id, ROUND(100*y.c/x.c, 2) perc_arrest FROM(SELECT pdistrict_id, COUNT(*) c FROM crime WHERE EXTRACT(YEAR FROM date_of_crime)=2018 GROUP BY pdistrict_id) x, (SELECT pdistrict_id, COUNT(*) c FROM crime WHERE arrest='TRUE' AND EXTRACT(YEAR FROM date_of_crime)=2018 GROUP BY pdistrict_id) y WHERE x.pdistrict_id=y.pdistrict_id ORDER BY perc_arrest DESC")
+    for x in cur:
+        record.append(x)
+
+    return record
+    con.close()
+
+def complex5():
     return 1
