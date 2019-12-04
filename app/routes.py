@@ -11,8 +11,17 @@ def index():
 		return render_template('index.html', tuples=tuples)
 	return render_template('index.html')
 
-@app.route("/compare/")
+@app.route("/compare/", methods=['GET', 'POST'])
 def compare():
+	if request.method == 'POST':
+		low = request.form['low']
+		high = request.form['high']
+		decline = connect.complex1(low, high)
+		decline = decline[0][0]
+		text = "Decrease"
+		if decline < 0:
+			text = "Increase"
+		return render_template('compare.html', decline=abs(decline), text=text)
 	return render_template('compare.html')
 
 @app.route("/insight/")
