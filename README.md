@@ -1,4 +1,4 @@
-# chicago
+# Chicago Crime
 #### Needs Python 3.5+
 - - - -
 1. Create and enter Virtual Environment
