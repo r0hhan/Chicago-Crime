@@ -4,7 +4,7 @@
 1. Create and enter Virtual Environment
     1. python -m venv venv
     2. venv\Scripts\activate
-    3. pip install -r req.txt
+    3. pip install -r requirements.txt
 2. Set Variable (*Case Sensitive*)
     - set FLASK_APP=chicago.py (_Windows_)
     - export FLASK_APP=chicago.py (_MacOS_)
